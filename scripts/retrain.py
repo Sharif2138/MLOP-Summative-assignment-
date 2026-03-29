@@ -1,13 +1,9 @@
-from preprocess import preprocess_input
-from create_model import create_model
-from train_model import train
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 import tensorflow as tf
 import pickle
 from pathlib import Path
 from tensorflow.keras import layers
 from sklearn.preprocessing import LabelEncoder
-from tensorflow.keras.applications import MobileNetV2
 
 
 folder_path = "../data/uploads"
