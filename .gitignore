@@ -1,0 +1,89 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# =========================
+# Jupyter / IPython
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
+
+# =========================
+# Logs & temp files
+# =========================
+*.log
+*.tmp
+*.swp
+*.bak
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDEs / Editors
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# Data files (IMPORTANT for ML)
+# =========================
+data/raw/
+data/processed/
+data/extracted_data/
+*.csv
+*.zip
+
+# =========================
+# Models (VERY IMPORTANT)
+# =========================
+models/
+*.pkl
+*.h5
+*.model
+
+# =========================
+# Streamlit
+# =========================
+.streamlit/
+
+# =========================
+# FastAPI / server
+# =========================
+*.db
+
+# =========================
+# Build / distribution
+# =========================
+build/
+dist/
+*.egg-info/
+
+# =========================
+# Testing / coverage
+# =========================
+.coverage
+htmlcov/
+.pytest_cache/
+
+# =========================
+# Misc
+# =========================
+*.sqlite3
