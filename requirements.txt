@@ -8,3 +8,5 @@ tensorflow
 h5py
 pillow
 python-multipart
+supabase
+streamlit
