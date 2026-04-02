@@ -51,13 +51,6 @@ data/extracted_data/
 *.csv
 *.zip
 
-# =========================
-# Models (VERY IMPORTANT)
-# =========================
-models/
-*.pkl
-*.h5
-*.model
 
 # =========================
 # Streamlit

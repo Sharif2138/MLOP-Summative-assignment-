@@ -7,7 +7,7 @@ from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 
 def load_model():
     global model, encoder
-    model = tf.keras.models.load_model('../model/skin_disease_detection.h5')
+    model = tf.keras.models.load_model('../model/skin_disease_detection.keras')
     encoder = joblib.load('../model/encoder.pkl')
 
 def predict(path):
