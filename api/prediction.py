@@ -5,11 +5,12 @@ import joblib
 import numpy as np
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 
-model = tf.keras.models.load_model('../model/mobilenetv2.h5')
-encoder = joblib.load('../model/encoder.pkl')
+def load_model():
+    global model, encoder
+    model = tf.keras.models.load_model('../model/skin_disease_detection.h5')
+    encoder = joblib.load('../model/encoder.pkl')
 
 def predict(path):
-    
     
     img = tf.io.read_file(path)
     img = tf.image.decode_jpeg(img, channels=3)
