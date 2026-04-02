@@ -10,3 +10,4 @@ pillow
 python-multipart
 supabase
 streamlit
+python-dotenv

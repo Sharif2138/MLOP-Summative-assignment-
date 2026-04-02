@@ -38,7 +38,7 @@ async def predict_image(file: UploadFile = File(...)):
 
 @app.post("/upload")
 async def upload_data(files: List[UploadFile] = File(...)):
-    upload_new_data(files)
+    await upload_new_data(files)
     return {"message": "Upload successful", "files": len(files)}
 
 

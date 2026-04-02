@@ -14,7 +14,7 @@ def predict(path):
     
     img = tf.io.read_file(path)
     img = tf.image.decode_jpeg(img, channels=3)
-    img = tf.image.resize(img, [128, 128])
+    img = tf.image.resize(img, [224, 224])
     img = preprocess_input(img)
     img = np.expand_dims(img, axis=0)
 
