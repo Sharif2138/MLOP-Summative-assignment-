@@ -2,24 +2,32 @@ import streamlit as st
 import requests
 import os
 import time
-from streamlit_autorefresh import st_autorefresh
 
 API_URL = "http://ml-api:8000"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PLOTS_DIR = os.path.join(BASE_DIR, "plots")
 
-# Page config   
+
+@st.cache_data(ttl=5)
+def fetch_uptime():
+    try:
+        res = requests.get(f"{API_URL}/uptime", timeout=3)
+        if res.status_code == 200:
+            return res.json().get("uptime_seconds", 0)
+    except:
+        return None
+
+# Page config
 st.set_page_config(
     page_title="DermAI — Skin Disease Detector",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
 
-#refresh after every 5 secs
-st_autorefresh(interval=5000, key="uptime_refresh")  
 
-#Global CSS
+
+# Global CSS
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
@@ -231,7 +239,7 @@ label, .stTextInput label { color: #8a8580 !important; font-size: 0.82rem !impor
 """, unsafe_allow_html=True)
 
 
-#Hero
+# Hero
 st.markdown("""
 <div class="hero">
     <div class="hero-badge">AI-Powered Dermatology</div>
@@ -240,64 +248,43 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-#MODEL STATUS (LIVE UPTIME)
-try:
-    uptime_res = requests.get(f"{API_URL}/uptime", timeout=3)
+# MODEL STATUS (LIVE UPTIME - CACHE BASED)
+uptime_seconds = fetch_uptime()
 
-    if uptime_res.status_code == 200:
-        data = uptime_res.json()
-        uptime_seconds = data.get("uptime_seconds", 0)
+if uptime_seconds is not None:
+    days = uptime_seconds // 86400
+    hours = (uptime_seconds % 86400) // 3600
+    minutes = (uptime_seconds % 3600) // 60
 
-        days = uptime_seconds // 86400
-        hours = (uptime_seconds % 86400) // 3600
-        minutes = (uptime_seconds % 3600) // 60
-
-        if days > 0:
-            uptime_str = f"{days}d {hours}h"
-        elif hours > 0:
-            uptime_str = f"{hours}h {minutes}m"
-        else:
-            uptime_str = f"{minutes}m"
-
-        st.markdown(f"""
-        <div style="
-            display:flex;
-            justify-content:center;
-            margin-top:-1rem;
-            margin-bottom:2rem;
-        ">
-            <div style="
-                background:rgba(92,201,120,0.08);
-                border:1px solid rgba(92,201,120,0.25);
-                color:#5cc978;
-                padding:0.6rem 1.4rem;
-                border-radius:999px;
-                font-size:0.8rem;
-                letter-spacing:0.05em;
-            ">
-                ● MODEL ONLINE · UPTIME {uptime_str}
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
+    if days > 0:
+        uptime_str = f"{days}d {hours}h"
+    elif hours > 0:
+        uptime_str = f"{hours}h {minutes}m"
     else:
-        st.markdown("""
-        <div style="text-align:center;margin-top:-1rem;margin-bottom:2rem;">
-            <div style="
-                background:rgba(224,80,80,0.08);
-                border:1px solid rgba(224,80,80,0.25);
-                color:#e05050;
-                padding:0.6rem 1.4rem;
-                border-radius:999px;
-                font-size:0.8rem;
-                display:inline-block;
-            ">
-                ● MODEL ERROR
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        uptime_str = f"{minutes}m"
 
-except:
+    st.markdown(f"""
+    <div style="
+        display:flex;
+        justify-content:center;
+        margin-top:-1rem;
+        margin-bottom:2rem;
+    ">
+        <div style="
+            background:rgba(92,201,120,0.08);
+            border:1px solid rgba(92,201,120,0.25);
+            color:#5cc978;
+            padding:0.6rem 1.4rem;
+            border-radius:999px;
+            font-size:0.8rem;
+            letter-spacing:0.05em;
+        ">
+            ● MODEL ONLINE · UPTIME {uptime_str}
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+else:
     st.markdown("""
     <div style="text-align:center;margin-top:-1rem;margin-bottom:2rem;">
         <div style="
@@ -382,7 +369,7 @@ with col_result:
     st.markdown('</div>', unsafe_allow_html=True)
 
 
-#Divider
+# Divider
 st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
 
 
@@ -421,9 +408,8 @@ else:
     """, unsafe_allow_html=True)
 
 
-#Divider
+# Divider
 st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
-
 
 
 # SECTION 3 — UPLOAD TRAINING DATA
@@ -494,9 +480,8 @@ if training_files:
 st.markdown('</div>', unsafe_allow_html=True)
 
 
-#Divider
+# Divider
 st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
-
 
 
 # SECTION 4 — RETRAIN

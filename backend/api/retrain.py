@@ -20,7 +20,7 @@ def retrain_pipeline():
         supabase_url=os.getenv("supabase_project_url"),
         supabase_key=os.getenv("supabase_anon_key")
     )
-    
+
     print("\n[bucket root contents]")
     root_items = supabase.storage.from_("training_data").list("")
     for item in root_items:
@@ -126,10 +126,11 @@ def retrain_pipeline():
         all_labels_encoded = encoder.fit_transform(all_labels)
         num_classes = len(encoder.classes_)
         print(f"[encoder] {num_classes} classes: {list(encoder.classes_)}")
-        
+
         BASE_DIR = os.path.dirname(__file__)
 
-        MODEL_PATH = os.path.join(BASE_DIR, "..", "model", "skin_disease_detection.keras")
+        MODEL_PATH = os.path.join(
+            BASE_DIR, "..", "model", "skin_disease_detection.keras")
         ENCODER_PATH = os.path.join(BASE_DIR, "..", "model", "encoder.pkl")
 
         os.makedirs(os.path.dirname(ENCODER_PATH), exist_ok=True)
@@ -178,9 +179,7 @@ def retrain_pipeline():
             Batch_size).cache().prefetch(autotune)
         val_data = val_data.batch(Batch_size).cache().prefetch(autotune)
 
-        
         base_model = tf.keras.models.load_model(MODEL_PATH)
-
 
         # Find the last non-output dense layer by name
         base_model_output = None
@@ -190,10 +189,11 @@ def retrain_pipeline():
               break
 
             if base_model_output is None:
-              raise ValueError("Could not find a Dense layer in the base model.")
+              raise ValueError(
+                  "Could not find a Dense layer in the base model.")
 
         new_output = layers.Dense(
-        num_classes, activation="softmax", name="predictions")(base_model_output)
+            num_classes, activation="softmax", name="predictions")(base_model_output)
         model = tf.keras.Model(inputs=base_model.inputs, outputs=new_output)
 
         for layer in model.layers[:-40]:

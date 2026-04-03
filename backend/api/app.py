@@ -12,6 +12,7 @@ app = FastAPI()
 
 start_time = datetime.now()
 
+
 @app.get("/")
 def root():
     return {"message": "API running"}
@@ -31,6 +32,7 @@ def get_uptime():
         "status": "running",
         "uptime_seconds": int(uptime.total_seconds())
     }
+
 
 @app.post("/predict")
 async def predict_image(file: UploadFile = File(...)):
