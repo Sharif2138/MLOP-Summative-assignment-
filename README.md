@@ -177,7 +177,9 @@ The screenshots below shows results from the `/predict` endpoint under different
 
 ## Model Evaluation (from Notebook)
 
-![Confusion matrix](images/image-1.png)     ![Accuracy curve](<images/Accuracy_curve (1).png>)  [loss curve](<images/loss_curve (1).png>)
+![Confusion matrix](images/image-1.png)     ![Accuracy curve](<images/Accuracy_curve (1).png>)  
+
+![loss curve](<images/loss_curve (1).png>)
 
 ---
 
