@@ -17,7 +17,6 @@
 |---|---|
 | Streamlit UI | `https://ml-frontend-0qhu.onrender.com/` |
 
-| FastAPI docs | `https://ml-backend-vmzc.onrender.com` |
 
 
 
@@ -92,7 +91,7 @@ cd MLOP-Summative-assignment-
 ### 2. Configure environment variables
 
 ```bash
-cp .env.example .env
+touch .env
 ```
 
 Open `.env` and fill in your Supabase project URL and anon key:
