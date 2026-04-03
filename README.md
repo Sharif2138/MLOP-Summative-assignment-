@@ -15,8 +15,9 @@
 
 | Service | URL |
 |---|---|
-| Streamlit UI | `http://YOUR_HOST:8501` |
-| FastAPI docs | `http://YOUR_HOST:8000/docs` |
+| Streamlit UI | `https://ml-frontend-0qhu.onrender.com/` |
+
+| FastAPI docs | `https://ml-backend-vmzc.onrender.com` |
 
 
 
@@ -152,27 +153,16 @@ Open [http://localhost:8089](http://localhost:8089), set users and spawn rate, a
 
 ### Results
 
-The table below shows results from the `/predict` endpoint under different Docker container counts.
-Each test ran for 60 seconds with 50 simulated users and a spawn rate of 5/s.
+The screenshots below shows results from the `/predict` endpoint under different Docker container counts.
 
-| Containers | Avg response (ms) | p95 response (ms) | Req/s | Failure % |
-|:---:|---:|---:|---:|---:|
-| 1 | — | — | — | — |
-| 2 | — | — | — | — |
-| 3 | — | — | — | — |
+
 
 <img width="1911" height="872" alt="image" src="https://github.com/user-attachments/assets/428618cd-1c97-488d-a899-cab94f51fa4e" />
 
+![1000 users , 100 persecond dashboard](<images/Screenshot 2026-04-03 222231.png>)
 
-To scale containers, run:
+![100 users, 10 per second dashboard](<images/Screenshot 2026-04-03 232149.png>)
 
-```bash
-docker compose up --scale ml-api=2   # or 3
-```
-
-> Note: Scaling beyond 1 requires a load balancer (e.g. nginx) in front of the API containers so traffic is distributed. See the docker-compose comments for guidance.
-
----
 
 ## API Endpoints
 
@@ -188,7 +178,7 @@ docker compose up --scale ml-api=2   # or 3
 
 ## Model Evaluation (from Notebook)
 
-*(Paste key results from your notebook here — accuracy, F1, precision, recall, confusion matrix screenshot.)*
+![Confusion matrix](images/image-1.png)     ![Accuracy curve](<images/Accuracy_curve (1).png>)  [loss curve](<images/loss_curve (1).png>)
 
 ---
 
