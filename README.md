@@ -161,6 +161,8 @@ Each test ran for 60 seconds with 50 simulated users and a spawn rate of 5/s.
 | 2 | — | — | — | — |
 | 3 | — | — | — | — |
 
+<img width="1911" height="872" alt="image" src="https://github.com/user-attachments/assets/428618cd-1c97-488d-a899-cab94f51fa4e" />
+
 
 To scale containers, run:
 

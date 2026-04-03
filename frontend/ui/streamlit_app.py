@@ -3,7 +3,7 @@ import requests
 import os
 import time
 
-API_URL = "http://ml-api:8000"
+API_URL = "https://ml-backend-vmzc.onrender.com"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PLOTS_DIR = os.path.join(BASE_DIR, "plots")
