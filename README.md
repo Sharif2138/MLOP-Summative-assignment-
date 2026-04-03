@@ -161,7 +161,6 @@ Each test ran for 60 seconds with 50 simulated users and a spawn rate of 5/s.
 | 2 | — | — | — | — |
 | 3 | — | — | — | — |
 
-*(Fill in the values from your Locust CSV reports. Screenshots of the Locust dashboard should also be added here.)*
 
 To scale containers, run:
 
