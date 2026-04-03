@@ -1,0 +1,5 @@
+python-multipart
+streamlit
+streamlit-autorefresh
+python-dotenv
+requests
